@@ -11,11 +11,9 @@ export default function LoginForm() {
         e.preventDefault();
 
         if (!email || !password) {
-            setError("All fields are required")
+            setError("All fields are required");
+            return;
         }
-
-        console.log(email);
-        console.log(password);
     }
 
     return (
@@ -31,7 +29,7 @@ export default function LoginForm() {
                         </div>
                         <div className="flex flex-col gap-2">
                             <button type="submit" className="px-4 py-1 bg-blue-500 w-fit rounded-md" onClick={handleClick}>Submit</button>
-                            <span className="text-right text-sm">Don&apos;t have an account?<a href="#" className="underline">Register</a></span>
+                            <span className="text-right text-sm">Don&apos;t have an account?<a href="/register" className="underline">Register</a></span>
                         </div>
                     </div>
                 </form>
