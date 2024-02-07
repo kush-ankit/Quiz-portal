@@ -40,7 +40,7 @@ export default function LoginForm() {
     }
 
     return (
-        <div className="grid place-items-center h-screen">
+        <div className="grid place-items-center h-[85vh]">
             <div className="bg-slate-300 rounded-md shadow-xl">
                 <form className="flex flex-col gap-4 items-center p-8" onSubmit={handleClick}>
                     <h1 className="text-3xl font-bold">Login User</h1>
