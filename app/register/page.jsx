@@ -8,8 +8,10 @@ export default async function RegisterPage() {
 
     if (session) redirect("/dashboard");
     return (
-        <div>
-            <RegisterForm />
+        <div className="w-full h-full grid place-items-center">
+            <div className="w-full">
+                <RegisterForm />
+            </div>
         </div>
     )
 }

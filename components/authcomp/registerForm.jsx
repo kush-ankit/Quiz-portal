@@ -67,7 +67,7 @@ export default function RegisterForm() {
 
 
     return (
-        <div className="grid place-items-center h-[85vh]">
+        <div className="grid place-items-center">
             <div className="bg-slate-300 rounded-md shadow-xl">
                 <form onSubmit={handleClick} className="flex flex-col gap-4 items-center p-8">
                     <h1 className="text-3xl font-bold">Register User</h1>

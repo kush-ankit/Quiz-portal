@@ -18,7 +18,7 @@ export default function RoomCodeForm() {
 
 
     return (
-        <div className='grid place-items-center h-[85vh]'>
+        <div className='grid place-items-center'>
             <div className='bg-slate-300 p-8 rounded-md'>
                 <h1 className="text-3xl font-bold text-center">Play Quiz</h1>
                 <form className="flex flex-col gap-4 py-2" onSubmit={handleClick}>

@@ -8,7 +8,7 @@ export default function RoomCardForm() {
 
     return (
         <div className="grid place-items-center">
-            <div className="shadow-lg p-8 bg-slate-300 flex flex-col gap-3 my-3">
+            <div className="shadow-lg p-8 bg-slate-200 flex flex-col gap-2 min-w-[15rem] max-w-[20rem]">
                 <span className="font-semibold">Quiz for GK dkjdfg jkrkgj kjdfgkj</span>
                 <span>32674</span>
             </div>

@@ -10,8 +10,8 @@ export default async function Home() {
   if (session) redirect("/dashboard");
 
   return (
-    <main className="w-full">
-      <div className="flex justify-around">
+    <main className="w-full h-full grid place-items-center">
+      <div className="w-full flex justify-around">
         <LoginForm />
         <RoomCodeForm />
       </div>

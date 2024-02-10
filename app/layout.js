@@ -15,8 +15,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <Navbar/>
-          {children}
+          <div className="w-full h-screen flex flex-col">
+            <Navbar />
+            <div className="w-full h-full">
+              {children}
+            </div>
+          </div>
         </AuthProvider>
       </body>
     </html>
