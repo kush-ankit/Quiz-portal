@@ -6,7 +6,9 @@ import bcrypt from "bcryptjs";
 
 
 export const authOptions = {
+
     providers: [
+
       CredentialsProvider({
         name: "credentials",
         credentials: {},
@@ -35,10 +37,13 @@ export const authOptions = {
         },
       }),
     ],
+
     session: {
       strategy: "jwt",
     },
+
     secret: process.env.NEXTAUTH_SECRET,
+    
     pages: {
       signIn: "/",
     },
