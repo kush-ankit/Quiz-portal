@@ -1,16 +1,15 @@
 import mongoose, { Schema, models } from "mongoose";
 
 const roomSchema = new Schema({
-    roomName: {
+    name: {
         type: String,
-        required: true,
     },
-    roomCode: {
+    code: {
         type: Number,
         required: true,
         unique: true,
     },
-    userid: {
+    email: {
         type: String,
         required: true,
     },
