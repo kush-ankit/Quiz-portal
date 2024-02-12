@@ -1,15 +1,39 @@
-import User from "@/models/user";
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth/next";
+import Room from "@/models/room";
+import { authOptions } from "../auth/[...nextauth]/route";
+import { random } from "@/lib/random";
 
 export async function POST(req) {
     try {
-        const { userEmail } = await req.json();
-        const user = await User.findOne({ email: userEmail })
-        console.log(user);
-        return NextResponse.json({ user }, { status: 201 });
+        const session = await getServerSession(authOptions);
+        const { roomName } = await req.json();
+        let Roomgen = await Room.create({ name: roomName, code: random(), email: session?.user?.email })
+        return NextResponse.json({ Roomgen }, { status: 201 })
     } catch (error) {
         console.log(error);
-        return NextResponse.json({ error });
+        return NextResponse.json({ error }, { status: 400 });
+    }
+}
 
+export async function GET(req) {
+    try {
+        const session = await getServerSession(authOptions);
+        const rooms = await Room.find({ email: session?.user?.email });
+        return NextResponse.json({ rooms }, { status: 201 });
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json({ error }, { status: 400 });
+    }
+}
+
+export async function PUT(req) {
+    try {
+        const session = await getServerSession(authOptions);
+        const rooms = await Room.find({ email: session?.user?.email });
+        return NextResponse.json({ rooms }, { status: 201 });
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json({ error }, { status: 400 });
     }
 }

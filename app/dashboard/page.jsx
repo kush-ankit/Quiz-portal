@@ -1,41 +1,46 @@
 "use client"
-
 import RoomCard from "@/components/roomcomp/roomCard";
-import RoomCardForm from "@/components/roomcomp/roomCard";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
 
     const [data, setData] = useState([]);
+    const [createButton, setCreateButton] = useState("Create Room");
 
     const { data: session } = useSession();
 
     const createRoomFunction = async () => {
         if (session) {
-            const res = await fetch("/api/rooms/create", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    roomName: "room is the name"
-                })
-            });
-            console.log(await res.json());
-            findAllRooms();
-        }
+            setCreateButton("Processing...");
+            const roomName = prompt("Enter room name:-");
+            if (roomName) {
+                const res = await fetch("/api/rooms", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        roomName: roomName,
+                    })
+                });
+                if (res.ok) {
+                    setCreateButton("Create Room");
+                } else setCreateButton("error");
+                findAllRooms();
+            }
+            setCreateButton("Create Room");
+        } else alert("Please login first");
     }
 
     const findAllRooms = async () => {
-        const roomRes = await fetch("/api/rooms/find", {
+        const roomRes = await fetch("/api/rooms", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             },
         });
-        var rooms = await roomRes.json();
-        console.log(rooms);
+        let rooms = await roomRes.json();
         setData(rooms.rooms);
     }
 
@@ -51,7 +56,7 @@ export default function Dashboard() {
             <div className="flex flex-col gap-4">
                 <div className="flex justify-between p-4 bg-slate-200">
                     <h1 className="text-3xl font-bold">Rooms:-</h1>
-                    <button className="bg-red-500 text-white px-2 py-1 rounded-md" onClick={createRoomFunction}>Create new Room</button>
+                    <button className="bg-red-500 text-white px-2 py-1 rounded-md" onClick={createRoomFunction}>{createButton}</button>
                 </div>
                 {/* <button onClick={findAllRooms}>click</button> */}
                 <div className="grid grid-cols-4 gap-4">
