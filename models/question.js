@@ -5,24 +5,26 @@ const questionSchema = new Schema({
         type: String,
         required: true,
     },
-    A: {
+    optionA: {
+        type: String,
+    },
+    optionB: {
+        type: String,
+    },
+    optionC: {
+        type: String,
+    },
+    optionD: {
+        type: String,
+    },
+    Answer: {
+        type: String,
+    },
+    code : {
         type: String,
         required: true,
     },
-    B: {
-        type: String,
-    },
-    C: {
-        type: String,
-    },
-    D: {
-        type: String,
-    },
-    Ans: {
-        type: String,
-        required: true,
-    },
-    roomid: {
+    email: {
         type: String,
         required: true,
     }

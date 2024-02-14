@@ -19,6 +19,7 @@ export async function POST(req) {
 export async function GET(req) {
     try {
         const session = await getServerSession(authOptions);
+        console.log(session);
         const rooms = await Room.find({ email: session?.user?.email });
         return NextResponse.json({ rooms }, { status: 201 });
     } catch (error) {
@@ -27,13 +28,13 @@ export async function GET(req) {
     }
 }
 
-export async function PUT(req) {
-    try {
-        const session = await getServerSession(authOptions);
-        const rooms = await Room.find({ email: session?.user?.email });
-        return NextResponse.json({ rooms }, { status: 201 });
-    } catch (error) {
-        console.log(error);
-        return NextResponse.json({ error }, { status: 400 });
-    }
-}
+// export async function PUT(req) {
+//     try {
+//         const session = await getServerSession(authOptions);
+//         const rooms = await Room.find({ email: session?.user?.email });
+//         return NextResponse.json({ rooms }, { status: 201 });
+//     } catch (error) {
+//         console.log(error);
+//         return NextResponse.json({ error }, { status: 400 });
+//     }
+// }
