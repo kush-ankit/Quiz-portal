@@ -29,9 +29,9 @@ export default function Page({ params }) {
 
     return (
         <div>
-            <div>
-                {questions && questions.map(({ _id, question, optionA, optionB, optionC, optionD, Answer }) => {
-                    return <QuestionComponent key={_id} question={question} optionA={optionA} optionB={optionB} optionC={optionC} optionD={optionD} Answer={Answer} />
+            <div className="flex flex-col gap-2">
+                {questions && questions.map(({ _id, question, optionA, optionB, optionC, optionD, Answer }, index) => {
+                    return <QuestionComponent key={_id} num={index + 1} question={question} optionA={optionA} optionB={optionB} optionC={optionC} optionD={optionD} Answer={Answer} />
                 })}
             </div>
         </div>
