@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Dashboard() {
 
-    const [data, setData] = useState([]);
+    const [data, setData] = useState();
     const [createButton, setCreateButton] = useState("Create Room");
 
     const { data: session } = useSession();
@@ -52,8 +52,8 @@ export default function Dashboard() {
 
 
     return (
-        <div className="grid place-items-center w-full p-8">
-            <div className="flex flex-col gap-4">
+        <div className="grid place-items-center w-full  p-8">
+            {data ? <div className="flex flex-col gap-4">
                 <div className="flex justify-between p-4 bg-slate-200">
                     <h1 className="text-3xl font-bold">Rooms:-</h1>
                     <button className="bg-red-500 text-white px-2 py-1 rounded-md" onClick={createRoomFunction}>{createButton}</button>
@@ -64,7 +64,7 @@ export default function Dashboard() {
                         return <RoomCard key={_id} name={name} code={code} />
                     })}
                 </div>
-            </div>
+            </div> : <div>Loading...</div>}
         </div>
     )
 }

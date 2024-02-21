@@ -2,24 +2,29 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { NextResponse } from "next/server";
 import Question from "@/models/question";
+import { connectMongoDB, disconnectDB } from "@/lib/mongodb";
 
 
 export async function GET(req) {
     try {
+        await connectMongoDB();
         const session = await getServerSession(authOptions);
         const searchParams = req.nextUrl.searchParams
         const code = searchParams.get('code')
         const rooms = await Question.find({ email: session?.user?.email, code: code });
         console.log(rooms);
-        return NextResponse.json( rooms , { status: 201 });
+        return NextResponse.json(rooms, { status: 201 });
     } catch (error) {
         console.log(error);
         return NextResponse.json({ error }, { status: 400 });
+    } finally {
+        await disconnectDB();
     }
 }
 
 export async function POST(req) {
     try {
+        await connectMongoDB();
         const session = await getServerSession(authOptions);
         console.log(session);
         if (session) {
@@ -32,5 +37,7 @@ export async function POST(req) {
     } catch (error) {
         console.log(error);
         return NextResponse.json({ error }, { status: 400 });
+    } finally {
+        await disconnectDB();
     }
 }

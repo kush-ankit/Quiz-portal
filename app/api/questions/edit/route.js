@@ -2,10 +2,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import Question from "@/models/question";
 import { NextResponse } from "next/server";
+import { connectMongoDB, disconnectDB } from "@/lib/mongodb";
 
 
 export async function GET(req) {
     try {
+        await connectMongoDB();
         const session = await getServerSession(authOptions);
         const searchParams = req.nextUrl.searchParams
         const id = searchParams.get('id')
@@ -15,11 +17,14 @@ export async function GET(req) {
     } catch (error) {
         console.log(error);
         return NextResponse.json({ error }, { status: 400 });
+    } finally {
+        await disconnectDB();
     }
 }
 
 export async function POST(req) {
     try {
+        await connectMongoDB();
         const session = await getServerSession(authOptions);
         const searchParams = req.nextUrl.searchParams
         const id = searchParams.get('id')
@@ -34,5 +39,7 @@ export async function POST(req) {
     } catch (error) {
         console.log(error);
         return NextResponse.json({ error }, { status: 400 });
+    } finally {
+        await disconnectDB();
     }
 }

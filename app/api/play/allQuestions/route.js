@@ -1,4 +1,5 @@
 import { connectMongoDB, disconnectDB } from "@/lib/mongodb";
+import Question from "@/models/question";
 import Room from "@/models/room";
 import { NextResponse } from "next/server";
 
@@ -9,11 +10,11 @@ export async function GET(req) {
         await connectMongoDB();
         const searchParams = req.nextUrl.searchParams;
         const roomcode = searchParams.get('code');
-        const rooms = await Room.findOne({ code: roomcode });
-        if (rooms) {
-            return NextResponse.json({ name: rooms.name, code: rooms.code, email: rooms.email }, { status: 202 });
+        const questions = await Question.find({ code: roomcode });
+        if (questions) {
+            return NextResponse.json(questions, { status: 202 });
         } else {
-            return NextResponse.json({ Message: "Room Doesn't exist !!" }, { status: 406 });
+            return NextResponse.json({ Message: "No questions found !!" }, { status: 406 });
         }
     } catch (error) {
         console.log(error);
