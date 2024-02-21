@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "./api/auth/[...nextauth]/route";
-import RoomCodeForm from "@/components/roomcomp/roomCodeForm";
+import CodeComponent from "@/components/play/codeComponent";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <main className="w-full h-full grid place-items-center">
       <div className="w-full flex justify-around">
-        <RoomCodeForm />
+        <CodeComponent />
       </div>
     </main>
   );
