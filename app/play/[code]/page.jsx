@@ -26,13 +26,17 @@ export default function Page({ params }) {
 
 
     return (
-        <div>
-            {
-                questions && <PlayCard key={questions[num]._id} question={questions[num].question} optionA={questions[num].optionA} optionB={questions[num].optionB} optionC={questions[num].optionC} optionD={questions[num].optionD} />
-            }
-            {
-                questions && questions.length === num + 1 ? <button>Submit</button> : <button onClick={() => setNum(num + 1)}>Next</button>
-            }
+        <div className='h-full w-full flex justify-center items-center'>
+            <div className='w-[1000px] bg-slate-300 p-4 rounded-sm'>
+                {
+                    questions && <PlayCard key={questions[num]._id} index={num+1} question={questions[num].question} optionA={questions[num].optionA} optionB={questions[num].optionB} optionC={questions[num].optionC} optionD={questions[num].optionD} />
+                }
+                <div className='flex justify-end'>
+                    {
+                        questions && questions.length === num + 1 ? <button className='px-4 py-2 bg-blue-500 rounded-sm'>Submit</button> : <button onClick={() => setNum(num + 1)} className='px-4 py-2 bg-blue-500 rounded-sm'>Next</button>
+                    }
+                </div>
+            </div>
         </div>
     )
 }
