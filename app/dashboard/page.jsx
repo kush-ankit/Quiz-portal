@@ -1,7 +1,17 @@
 "use client"
 import RoomCard from "@/components/roomcomp/roomCard";
+import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
+
 
 export default function Dashboard() {
 
@@ -52,13 +62,16 @@ export default function Dashboard() {
 
 
     return (
-        <div className="grid place-items-center w-full  p-8">
+        <div className="grid place-items-center w-full h-full">
             {data ? <div className="flex flex-col gap-4">
-                <div className="flex justify-between p-4 bg-slate-200">
-                    <h1 className="text-3xl font-bold">Rooms:-</h1>
-                    <button className="bg-red-500 text-white px-2 py-1 rounded-md" onClick={createRoomFunction}>{createButton}</button>
-                </div>
-                {/* <button onClick={findAllRooms}>click</button> */}
+                <Card className='flex justify-between items-center'>
+                    <CardHeader>
+                        <CardTitle>Rooms</CardTitle>
+                    </CardHeader>
+                    <CardFooter className='grid place-items-center'>
+                        <Button variant='destructive' onClick={createRoomFunction}>{createButton}</Button>
+                    </CardFooter>
+                </Card>
                 <div className="grid grid-cols-4 gap-4">
                     {data && data.map(({ _id, name, code }) => {
                         return <RoomCard key={_id} name={name} code={code} />

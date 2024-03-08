@@ -21,7 +21,6 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-
           <AuthProvider>
             <div className="w-full h-screen flex flex-col">
               <Navbar />

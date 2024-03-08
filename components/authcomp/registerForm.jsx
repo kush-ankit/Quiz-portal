@@ -1,6 +1,17 @@
 "use client"
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+
 
 export default function RegisterForm() {
 
@@ -68,23 +79,29 @@ export default function RegisterForm() {
 
     return (
         <div className="grid place-items-center">
-            <div className="bg-slate-300 rounded-md shadow-xl">
-                <form onSubmit={handleClick} className="flex flex-col gap-4 items-center p-8">
-                    <h1 className="text-3xl font-bold">Register User</h1>
-                    <div className="flex flex-col gap-3">
-                        <input type="text" className="p-1 rounded-md outline-none" id="name" placeholder="Name" onChange={e => setName(e.target.value)} />
-                        <input type="email" className="p-1 rounded-md outline-none" id="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
-                        <div className="flex flex-col gap-1">
-                            <input type="password" className="p-1 rounded-md outline-none" id="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-                            {error && <span className="text-red-500 text-sm">*{error}</span>}
+            <Card className='w-[20rem]'>
+                <form onSubmit={handleClick}>
+                    <CardHeader>
+                        <CardTitle>Register User</CardTitle>
+                        <CardDescription>Card Description</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="flex flex-col gap-3">
+                            <Input type="text" className="p-1 rounded-md outline-none" id="name" placeholder="Name" onChange={e => setName(e.target.value)} />
+                            <Input type="email" className="p-1 rounded-md outline-none" id="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
+                            <div className="flex flex-col gap-1">
+                                <Input type="password" className="p-1 rounded-md outline-none" id="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+                                {error && <span className="text-red-500 text-sm">*{error}</span>}
+                            </div>
                         </div>
-                        <div className="flex flex-col gap-2">
-                            <button type="submit" className="px-4 py-1 bg-blue-500 w-fit rounded-md">{status}</button>
-                            <span className="text-right text-sm">Already have an account?<a href="/" className="underline">Login</a></span>
-                        </div>
-                    </div>
+                    </CardContent>
+                    <CardFooter className='flex flex-col'>
+                        <Button type="submit" variant="outline">{status}</Button>
+                        <span className="text-right text-sm">Already have an account?<a href="/login" className="underline">Login</a></span>
+                    </CardFooter>
                 </form>
-            </div >
+            </Card>
+
         </div >
     )
 }
