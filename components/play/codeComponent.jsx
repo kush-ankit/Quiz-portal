@@ -1,5 +1,4 @@
 "use client"
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
     Card,
@@ -11,24 +10,19 @@ import {
 } from "@/components/ui/card"
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { useRouter } from 'next/navigation';
+import { useQuestionStore } from "@/global/questionStore";
+
 
 
 export default function CodeComponent() {
-    const [code, setCode] = useState("");
     const router = useRouter();
-
+    const [code, setCode] = useState("");
+    const [getStoreQuestion] = useQuestionStore((state) => [state.getStoreQuestion])
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch(`/api/play?code=${code}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        let data = await res.json();
-        if (res.ok) {
-            router.push(`/play/${data.code}`)
-        }
+        await getStoreQuestion(`/api/play/allQuestions?code=${code}`)
+        router.push('/play/quiz')
     }
 
     return (

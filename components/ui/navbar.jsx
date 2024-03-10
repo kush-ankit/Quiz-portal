@@ -12,7 +12,7 @@ export default function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <nav className="bg-primary-foreground w-full p-6 flex justify-between">
+    <nav className="bg-primary-foreground w-full md:p-6 p-4 flex justify-between">
       <h1 className="text-3xl font-bold">quizee</h1>
       {session && <div className="flex gap-2 items-baseline">
         <span className="font-bold">{session?.user?.name}</span>
@@ -25,10 +25,10 @@ export default function Navbar() {
       </div>}
       {!session &&
         <div className="flex gap-2">
-          <Button asChild variant='outline'>
+          <Button asChild variant='outline' size='sm'>
             <Link href={"/login"}>Login</Link>
           </Button>
-          <Button asChild>
+          <Button asChild size='sm'>
             <Link href={"/register"}>Register</Link>
           </Button>
           <ModeToggle />

@@ -1,5 +1,3 @@
-"use client"
-import { useEffect, useState } from "react";
 import {
     Card,
     CardContent,
@@ -10,57 +8,44 @@ import {
 } from "@/components/ui/card"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Button } from "../ui/button";
 
-export default function Page({ params }) {
+export default function QuesComponent({ question, optionA, optionB, optionC, optionD }) {
 
-    const [questions, setQuestions] = useState();
-    const [num, setNum] = useState(0);
-
-    const getQuestions = async () => {
-        const res = await fetch(`/api/play/allQuestions?code=${params.code}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            },
-        })
-        let quest = await res.json();
-        setQuestions(quest);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
     }
 
-    useEffect(
-        () => {
-            getQuestions();
-        }, []
-    );
-
-
     return (
-        <div className='p-4'>
-            <Card className=''>
+        <Card>
+            <form onSubmit={handleSubmit}>
                 <CardHeader>
-                    <CardTitle>Card Title</CardTitle>
-                    <CardDescription>Card Description</CardDescription>
+                    <CardTitle>{question}</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <RadioGroup defaultValue="comfortable">
                         <div className="flex items-center space-x-2">
                             <RadioGroupItem value="default" id="r1" />
-                            <Label htmlFor="r1">Default</Label>
+                            <Label htmlFor="r1">{optionA}</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                             <RadioGroupItem value="comfortable" id="r2" />
-                            <Label htmlFor="r2">Comfortable</Label>
+                            <Label htmlFor="r2">{optionB}</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                             <RadioGroupItem value="compact" id="r3" />
-                            <Label htmlFor="r3">Compact</Label>
+                            <Label htmlFor="r3">{optionC}</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="compact" id="r3" />
+                            <Label htmlFor="r3">{optionD}</Label>
                         </div>
                     </RadioGroup>
                 </CardContent>
                 <CardFooter>
-                    <p>Card Footer</p>
+                    <Button type='submit'>Submit</Button>
                 </CardFooter>
-            </Card>
-        </div>
+            </form>
+        </Card>
     )
 }
