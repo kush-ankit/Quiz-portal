@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/providers/theme-provider"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Quizee2.0",
+  title: "Quizee",
   description: "Quiz platform",
 };
 
