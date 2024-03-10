@@ -62,17 +62,17 @@ export default function Dashboard() {
 
 
     return (
-        <div className="grid place-items-center w-full h-full">
+        <div className=" w-full h-full p-4">
             {data ? <div className="flex flex-col gap-4">
-                <Card className='flex justify-between items-center'>
+                <Card className='flex justify-between items-center '>
                     <CardHeader>
                         <CardTitle>Rooms</CardTitle>
                     </CardHeader>
-                    <CardFooter className='grid place-items-center'>
+                    <div className='p-4'>
                         <Button variant='destructive' onClick={createRoomFunction}>{createButton}</Button>
-                    </CardFooter>
+                    </div>
                 </Card>
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-5 gap-4">
                     {data && data.map(({ _id, name, code }) => {
                         return <RoomCard key={_id} name={name} code={code} />
                     })}

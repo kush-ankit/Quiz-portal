@@ -15,8 +15,7 @@ export default function RoomCard({ name, code }) {
     const router = useRouter();
 
     return (
-        <div className="grid place-items-center" onClick={() => router.push(`/rooms/${code}`)}>
-            <Card className='w-[18rem]'>
+            <Card className='' onClick={() => router.push(`/rooms/${code}`)}>
                 <CardHeader>
                     <CardTitle>{name}</CardTitle>
                 </CardHeader>
@@ -24,7 +23,5 @@ export default function RoomCard({ name, code }) {
                     <p>{code}</p>
                 </CardContent>
             </Card>
-
-        </div>
     );
 }
