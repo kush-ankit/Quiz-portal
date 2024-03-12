@@ -12,7 +12,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useRouter } from 'next/navigation';
 import { usePlayerStore } from "@/global/playerStore";
-// import { useQuestionStore } from "@/global/questionStore";
+import { useQuestionStore } from "@/global/questionStore";
 
 
 
@@ -20,8 +20,9 @@ export default function CodeComponent() {
     const router = useRouter();
     const [code, setCode] = useState("");
     const [playerName, setPlayerName] = useState("");
+    const [error, setError] = useState();
     const [player, roomName, roomEditor, roomCode, setPlayer, setRoomName, setRoomEditor, setRoomCode] = usePlayerStore((state) => [state.player, state.roomName, state.roomEditor, state.roomCode, state.setPlayer, state.setRoomName, state.setRoomEditor, state.setRoomCode]);
-    // const [question, getStoreQuestion] = useQuestionStore((state) => [state.question, state.getStoreQuestion])
+    const [question, getStoreQuestion] = useQuestionStore((state) => [state.question, state.getStoreQuestion])
 
     // const handleSubmit = async (e) => {
     //     e.preventDefault();
@@ -46,7 +47,11 @@ export default function CodeComponent() {
             setRoomName(roomDetails.name);
             setRoomEditor(roomDetails.email);
             setRoomCode(roomDetails.code);
+            getStoreQuestion(`/api/play/allQuestions?code=${code}`)
             router.push('/play/quiz')
+        }
+        else {
+            setError(res.statusText);
         }
     }
 
@@ -62,7 +67,8 @@ export default function CodeComponent() {
                     <Input type="text" placeholder="Player Name" onChange={(e) => setPlayerName(e.target.value)} />
                     <Input type="number" placeholder="Code" onChange={(e) => setCode(e.target.value)} />
                 </CardContent>
-                <CardFooter>
+                <CardFooter className='flex flex-col text-left'>
+                    <span className="text-sm text-red-500">{error && error}</span>
                     <Button type="submit" variant="outline">Submit</Button>
                 </CardFooter>
             </form>
