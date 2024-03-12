@@ -18,11 +18,14 @@ import { useQuestionStore } from "@/global/questionStore";
 export default function CodeComponent() {
     const router = useRouter();
     const [code, setCode] = useState("");
-    const [getStoreQuestion] = useQuestionStore((state) => [state.getStoreQuestion])
+    const [question, getStoreQuestion] = useQuestionStore((state) => [state.question, state.getStoreQuestion])
     const handleSubmit = async (e) => {
         e.preventDefault();
         await getStoreQuestion(`/api/play/allQuestions?code=${code}`)
-        router.push('/play/quiz')
+        if (question) {
+            router.push('/play/quiz')
+            console.log(question);
+        }
     }
 
     return (

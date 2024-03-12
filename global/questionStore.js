@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 export const useQuestionStore = create((set) => ({
-    question: [],
+    questions: null,
     getStoreQuestion: async (addre) => {
         const response = await fetch(addre, {
             method: "GET",
