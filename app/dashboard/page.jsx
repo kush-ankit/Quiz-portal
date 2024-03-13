@@ -5,12 +5,10 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import {
     Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { Skeleton } from "@/components/ui/skeleton"
 
 
 export default function Dashboard() {
@@ -77,7 +75,15 @@ export default function Dashboard() {
                         return <RoomCard key={_id} name={name} code={code} />
                     })}
                 </div>
-            </div> : <div>Loading...</div>}
+            </div> : <div className="flex flex-col gap-4">
+                <Skeleton className="h-[80px] w-[100%] rounded-xl" />
+                <div className="flex gap-4">
+                    <Skeleton className="h-[130px] w-[250px] rounded-xl" />
+                    <Skeleton className="h-[130px] w-[250px] rounded-xl" />
+                    <Skeleton className="h-[130px] w-[250px] rounded-xl" />
+                    <Skeleton className="h-[130px] w-[250px] rounded-xl" />
+                </div>
+            </div>}
         </div>
     )
 }
