@@ -14,7 +14,7 @@ export default function RoomLayout({ children, params }) {
         <section className="p-4 w-full h-full flex flex-col gap-4">
             <Card className='flex justify-between'>
                 <CardHeader>
-                    <CardTitle>Code-{params.room}</CardTitle>
+                    <CardTitle>{params.room}</CardTitle>
                 </CardHeader>
                 <div className='p-4'>
                     <Button onClick={() => router.push(`/rooms/${params.room}/add`)}>+</Button>

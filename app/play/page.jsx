@@ -1,5 +1,4 @@
 import CodeComponent from '@/components/play/codeComponent'
-import React from 'react'
 
 export default function Page() {
     return (

@@ -1,11 +1,17 @@
 "use client"
 
 import QuestionComponent from "@/components/question/quesComp";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Page({ params }) {
-
+    const { data: session } = useSession();
     const [questions, setQuestions] = useState([]);
+    const router = useRouter();
+    if (!session) {
+        router.push('/')
+    }
 
     const getQuestions = async () => {
         const res = await fetch(`/api/questions?code=${params.room}`, {
@@ -22,7 +28,7 @@ export default function Page({ params }) {
     useEffect(
         () => {
             getQuestions();
-        }, []
+        },[]
     );
 
 
