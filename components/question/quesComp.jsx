@@ -28,7 +28,7 @@ export default function QuestionComponent({ id, num, question, optionA, optionB,
                     <p>Answer. {Answer}</p>
                 </CardContent>
                 <CardFooter>
-                    <Button onClick={() => router.push(`/rooms/${code}/edit?id=${id}`)}>Edit</Button>
+                    <Button onClick={() => router.push(`/dashboard/rooms/${code}/edit?id=${id}`)}>Edit</Button>
                 </CardFooter>
             </Card>
         </div>

@@ -15,13 +15,13 @@ export default function RoomCard({ name, code }) {
     const router = useRouter();
 
     return (
-            <Card className='' onClick={() => router.push(`/rooms/${code}`)}>
-                <CardHeader>
-                    <CardTitle>{name}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <p>{code}</p>
-                </CardContent>
-            </Card>
+        <Card className='' onClick={() => router.push(`/dashboard/rooms/${code}`)}>
+            <CardHeader>
+                <CardTitle>{name}</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <p>{code}</p>
+            </CardContent>
+        </Card>
     );
 }

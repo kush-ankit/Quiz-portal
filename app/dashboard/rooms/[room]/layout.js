@@ -17,7 +17,7 @@ export default function RoomLayout({ children, params }) {
                     <CardTitle>{params.room}</CardTitle>
                 </CardHeader>
                 <div className='p-4'>
-                    <Button onClick={() => router.push(`/rooms/${params.room}/add`)}>+</Button>
+                    <Button onClick={() => router.push(`/dashboard/rooms/${params.room}/add`)}>+</Button>
                 </div>
             </Card>
             <div>

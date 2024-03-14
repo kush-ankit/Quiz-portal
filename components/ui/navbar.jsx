@@ -30,10 +30,10 @@ export default function Navbar() {
         {!session && !player &&
           <div className="flex gap-2">
             <Button asChild variant='outline' size='sm'>
-              <Link href={"/login"}>Login</Link>
+              <Link href={"/auth/login"}>Login</Link>
             </Button>
             <Button asChild size='sm'>
-              <Link href={"/register"}>Register</Link>
+              <Link href={"/auth/register"}>Register</Link>
             </Button>
           </div>
         }

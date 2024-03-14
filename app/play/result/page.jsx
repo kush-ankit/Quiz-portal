@@ -13,9 +13,9 @@ import {
 export default function CardWithForm() {
   return (
     <div className="w-full h-full grid place-items-center">
-      <Card className='p-6 w-[25rem]'>
+      <Card className='p-6 w-[35rem] text-xl shadow-lg outline outline-1'>
         <CardHeader>
-          <CardTitle>Result</CardTitle>
+          <CardTitle className='text-3xl'>Result</CardTitle>
           <CardDescription>This is demo result</CardDescription>
         </CardHeader>
         <CardContent>
@@ -24,9 +24,8 @@ export default function CardWithForm() {
           <p>Wrong Answer: 10</p>
           <p>Total Marks: 50</p>
         </CardContent>
-        <CardFooter className='flex justify-between'>
+        <CardFooter className='flex justify-center'>
           <Button>Submit</Button>
-          <Button>Reset</Button>
         </CardFooter>
       </Card>
     </div>
