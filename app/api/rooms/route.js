@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next";
 import Room from "@/models/room";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { random } from "@/lib/random";
-import { connectMongoDB, disconnectDB } from "@/lib/mongodb";
+import { connectMongoDB } from "@/lib/mongodb";
 
 export async function POST(req) {
     try {
@@ -15,8 +15,6 @@ export async function POST(req) {
     } catch (error) {
         console.log(error);
         return NextResponse.json({ error }, { status: 400 });
-    } finally {
-        await disconnectDB();
     }
 }
 
@@ -24,24 +22,10 @@ export async function GET(req) {
     try {
         await connectMongoDB();
         const session = await getServerSession(authOptions);
-        console.log(session);
         const rooms = await Room.find({ email: session?.user?.email });
         return NextResponse.json({ rooms }, { status: 201 });
     } catch (error) {
         console.log(error);
         return NextResponse.json({ error }, { status: 400 });
-    } finally {
-        await disconnectDB();
     }
 }
-
-// export async function PUT(req) {
-//     try {
-//         const session = await getServerSession(authOptions);
-//         const rooms = await Room.find({ email: session?.user?.email });
-//         return NextResponse.json({ rooms }, { status: 201 });
-//     } catch (error) {
-//         console.log(error);
-//         return NextResponse.json({ error }, { status: 400 });
-//     }
-// }

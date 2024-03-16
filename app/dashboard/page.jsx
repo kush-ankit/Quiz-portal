@@ -9,6 +9,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
+import axios from 'axios';
 
 
 export default function Dashboard() {
@@ -42,14 +43,15 @@ export default function Dashboard() {
     }
 
     const findAllRooms = async () => {
-        const roomRes = await fetch("/api/rooms", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            },
-        });
-        let rooms = await roomRes.json();
-        setData(rooms.rooms);
+        // const roomRes = await axios.get('/api/rooms');
+        // console.log(roomRes);
+        // let rooms = await roomRes.json();
+        // setData(rooms.rooms);
+        axios.get('api/rooms')
+            .then(function (response) {
+                // handle success
+                setData(response.data.rooms)
+            })
     }
 
     useEffect(

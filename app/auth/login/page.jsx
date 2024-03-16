@@ -1,12 +1,12 @@
-"use client"
 import LoginForm from "@/components/authcomp/loginForm";
-import { redirect, useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
-export default function Login() {
-    const router = new useRouter();
-    const { data: session } = useSession();
-    if (session) router.push("/dashboard");
+export default async function Login() {
+
+    const session = await getServerSession(authOptions);
+    if (session) redirect("/dashboard/");
 
     return (
         <main className="w-full h-full grid place-items-center">

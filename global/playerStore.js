@@ -10,3 +10,8 @@ export const usePlayerStore = create((set) => ({
     setRoomEditor: (roomEditor) => set({ roomEditor }),
     setRoomCode: (roomCode) => set({ roomCode }),
 }));
+
+export const useAnswerStore = create((set)=> ({
+    Answer: null,
+    setAnswer: (Ans) => set((state)=>{ Answer: [...state.Answer, Ans] })
+}))

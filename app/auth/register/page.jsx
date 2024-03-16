@@ -5,7 +5,6 @@ import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 export default async function RegisterPage() {
     const session = await getServerSession(authOptions);
-
     if (session) redirect("/dashboard");
     return (
         <div className="w-full h-full grid place-items-center">

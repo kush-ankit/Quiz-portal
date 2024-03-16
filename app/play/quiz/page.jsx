@@ -15,10 +15,17 @@ import { Button } from "@/components/ui/button";
 export default function Page() {
     const [question] = useQuestionStore((state) => [state.question]);
     const [num, setNum] = useState(0)
+    const [ans, setAns] = useState(null)
+
+    const handleRadioChange = (e) => {
+        setAns(e.target.value)
+        console.log(ans);
+    }
 
     if (question) {
         return (
             <div className="p-4">
+                {ans}
                 <Card>
                     <CardHeader>
                         <CardTitle>{question[num].question}</CardTitle>
@@ -26,19 +33,19 @@ export default function Page() {
                     <CardContent>
                         <RadioGroup>
                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value={question[num].optionA} id="r1" />
+                                <RadioGroupItem value={question[num].optionA} id="r1" onClick={handleRadioChange} />
                                 <Label htmlFor="r1">{question[num].optionA}</Label>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value={question[num].optionB} id="r2" />
+                                <RadioGroupItem value={question[num].optionB} id="r2" onClick={handleRadioChange} />
                                 <Label htmlFor="r2">{question[num].optionB}</Label>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value={question[num].optionC} id="r3" />
+                                <RadioGroupItem value={question[num].optionC} id="r3" onClick={handleRadioChange} />
                                 <Label htmlFor="r3">{question[num].optionC}</Label>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value={question[num].optionD} id="r4" />
+                                <RadioGroupItem value={question[num].optionD} id="r4" onClick={handleRadioChange} />
                                 <Label htmlFor="r4">{question[num].optionD}</Label>
                             </div>
                         </RadioGroup>
