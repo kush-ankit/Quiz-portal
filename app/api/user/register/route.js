@@ -12,7 +12,5 @@ export async function POST(req) {
         return NextResponse.json({ name, email, password }, { status: 201 });
     } catch (error) {
         return NextResponse.json({ message: "error" }, { status: 400 });
-    } finally {
-        await disconnectDB();
     }
 }

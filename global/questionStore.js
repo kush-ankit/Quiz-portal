@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { useAnswerStore, usePlayerStore } from './playerStore';
 
 export const useQuestionStore = create((set) => ({
     questions: null,
@@ -9,7 +10,9 @@ export const useQuestionStore = create((set) => ({
                 "Content-Type": "application/json"
             }
         })
-        set({ question: await response.json() })
+        let questions = await response.json()
+        set({ question: questions })
+        useAnswerStore.setState({ totalQuestion: questions.length })
     },
     removeAllQuestion: () => set({ question: [] }),
 }));

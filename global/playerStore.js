@@ -11,7 +11,13 @@ export const usePlayerStore = create((set) => ({
     setRoomCode: (roomCode) => set({ roomCode }),
 }));
 
-export const useAnswerStore = create((set)=> ({
-    Answer: null,
-    setAnswer: (Ans) => set((state)=>{ Answer: [...state.Answer, Ans] })
-}))
+export const useAnswerStore = create((set) => ({
+    marks: 0,
+    correctAnswer: 0,
+    incorrectAnswer: 0,
+    totalQuestion: 0,
+    setMarks: () => set((state) => ({ marks: state.marks + 5 })),
+    setCorrectAnswer: () => set((state) => ({ correctAnswer: state.correctAnswer + 1 })),
+    setIncorrectAnswer: () => set((state) => ({ incorrectAnswer: state.incorrectAnswer + 1 })),
+    setTotalQuestion: (totalQuestion) => set({ totalQuestion }),
+}));

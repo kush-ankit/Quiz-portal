@@ -1,6 +1,5 @@
 import { connectMongoDB, disconnectDB } from "@/lib/mongodb";
 import Question from "@/models/question";
-import Room from "@/models/room";
 import { NextResponse } from "next/server";
 
 
@@ -19,7 +18,5 @@ export async function GET(req) {
     } catch (error) {
         console.log(error);
         return NextResponse.json({ error }, { status: 405 });
-    } finally {
-        await disconnectDB();
     }
 }

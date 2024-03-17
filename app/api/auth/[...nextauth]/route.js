@@ -1,4 +1,4 @@
-import { connectMongoDB, disconnectDB } from "@/lib/mongodb";
+import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -33,9 +33,7 @@ export const authOptions = {
           return user;
         } catch (error) {
           console.log("Error: ", error);
-        } finally {
-          await disconnectDB();
-        }
+        } 
       },
     }),
   ],

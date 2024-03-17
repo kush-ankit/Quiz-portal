@@ -11,21 +11,46 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useAnswerStore } from "@/global/playerStore";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
     const [question] = useQuestionStore((state) => [state.question]);
+    const [setMarks, setCorrectAnswer, setIncorrectAnswer] = useAnswerStore((state) => [state.setMarks, state.setCorrectAnswer, state.setIncorrectAnswer]);
+    const router = useRouter();
     const [num, setNum] = useState(0)
     const [ans, setAns] = useState(null)
+
 
     const handleRadioChange = (e) => {
         setAns(e.target.value)
         console.log(ans);
+
+    }
+
+    const handleSubmit = () => {
+        if (question[num].Answer === ans) {
+            setCorrectAnswer();
+            setMarks();
+        } else {
+            setIncorrectAnswer();
+        }
+        setNum(num + 1)
+    }
+
+    const handlelastSubmit = () => {
+        if (question[num].Answer === ans) {
+            setCorrectAnswer();
+            setMarks();
+        } else {
+            setIncorrectAnswer();
+        }
+        router.push('/play/result')
     }
 
     if (question) {
         return (
             <div className="p-4">
-                {ans}
                 <Card>
                     <CardHeader>
                         <CardTitle>{question[num].question}</CardTitle>
@@ -50,8 +75,13 @@ export default function Page() {
                             </div>
                         </RadioGroup>
                     </CardContent>
-                    <CardFooter>
-                        <Button onClick={(e) => setNum(num + 1)} >Next</Button>
+                    <CardFooter className='flex justify-evenly'>
+                        <Button onClick={(e) => setNum(num - 1)} >Prev</Button>
+                        {
+                            num < question.length - 1 ?
+                                <Button onClick={handleSubmit} >Next</Button> :
+                                <Button onClick={handlelastSubmit}>Submit</Button>
+                        }
                     </CardFooter>
                 </Card>
             </div>

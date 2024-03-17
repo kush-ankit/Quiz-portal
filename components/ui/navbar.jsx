@@ -16,7 +16,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-primary-foreground w-full md:p-6 p-4 flex justify-between">
-      <h1 className="text-3xl font-bold">quizee</h1>
+      <a href="/"><h1 className="text-3xl font-bold">quizee</h1></a>
       <div className="flex gap-2">
         {session && <div className="flex gap-2 items-baseline">
           <span className="font-bold">{session?.user?.name}</span>

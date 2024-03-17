@@ -72,7 +72,7 @@ export default function Dashboard() {
                         <Button variant='destructive' onClick={createRoomFunction}>{createButton}</Button>
                     </div>
                 </Card>
-                <div className="grid grid-cols-5 gap-4">
+                <div className="grid md:grid-cols-5 gap-4">
                     {data && data.map(({ _id, name, code }) => {
                         return <RoomCard key={_id} name={name} code={code} />
                     })}
