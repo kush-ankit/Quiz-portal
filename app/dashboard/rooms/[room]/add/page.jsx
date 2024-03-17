@@ -11,15 +11,8 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import { SelectGroup, SelectLabel } from "@radix-ui/react-select";
-
+import { ReloadIcon } from "@radix-ui/react-icons"
+import { useRouter } from "next/navigation";
 
 
 export default function AddQuestion({ params }) {
@@ -30,11 +23,14 @@ export default function AddQuestion({ params }) {
     const [optionC, setOptionC] = useState("")
     const [optionD, setOptionD] = useState("")
     const [Answer, setCorrectOption] = useState("")
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
+    const [error, setError] = useState(null);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const res = fetch("/api/questions", {
+        setLoading(true);
+        const res = await fetch("/api/questions", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -50,17 +46,17 @@ export default function AddQuestion({ params }) {
                 code: params.room
             })
         })
-        console.log(Answer);
         if (res.ok) {
-            const form = e.target;
-            form.reset();
+            router.push(`/dashboard/rooms/${params.room}`);
+        } else {
+            setLoading(false);
+            setError(res.statusText)
         }
     }
 
 
     return (
         <Card>
-            {Answer}
             <CardHeader>
                 <CardTitle>Add Question</CardTitle>
                 <CardDescription>Enter Questions and options</CardDescription>
@@ -73,23 +69,22 @@ export default function AddQuestion({ params }) {
                         <Input value={optionB} type="text" placeholder="Option B" onChange={(e) => setOptionB(e.target.value)} />
                         <Input value={optionC} type="text" placeholder="Option C" onChange={(e) => setOptionC(e.target.value)} />
                         <Input value={optionD} type="text" placeholder="Option D" onChange={(e) => setOptionD(e.target.value)} />
-                        <Select onValueChange={(e) => setCorrectOption(e.target.value)} defaultValue={Answer}>
-                            <SelectTrigger className="w-[180px]" >
-                                <SelectValue placeholder="Answer" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                    <SelectItem value="A">A</SelectItem>
-                                    <SelectItem value="B" >B</SelectItem>
-                                    <SelectItem value="C" >C</SelectItem>
-                                    <SelectItem value="D">D</SelectItem>
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
+                        <select name="Answer" onChange={(e) => setCorrectOption(e.target.value)} className="p-2 rounded-md bg-inherit outline outline-[0.5px] outline-primary-foreground text-white">
+                            <option value="A" className="text-primary-foreground">A</option>
+                            <option value="B" className="text-primary-foreground">B</option>
+                            <option value="C" className="text-primary-foreground">C</option>
+                            <option value="D" className="text-primary-foreground">D</option>
+                        </select>
                     </div>
                 </CardContent>
                 <CardFooter>
-                    <Button type="submit" color="primary">Add & Next</Button>
+                    <span>{error}</span>
+                    {loading ? <Button disabled>
+                        <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                        Please wait
+                    </Button> : <Button type="submit" color="primary">Save Question</Button>
+                    }
+
                 </CardFooter>
             </form>
         </Card>
