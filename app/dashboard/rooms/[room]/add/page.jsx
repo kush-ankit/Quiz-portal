@@ -13,6 +13,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { useRouter } from "next/navigation";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import { Label } from "@/components/ui/label";
 
 
 export default function AddQuestion({ params }) {
@@ -22,7 +30,7 @@ export default function AddQuestion({ params }) {
     const [optionB, setOptionB] = useState("")
     const [optionC, setOptionC] = useState("")
     const [optionD, setOptionD] = useState("")
-    const [Answer, setCorrectOption] = useState("")
+    const [Answer, setCorrectOption] = useState("A")
     const [loading, setLoading] = useState(false)
     const router = useRouter()
     const [error, setError] = useState(null);
@@ -65,16 +73,23 @@ export default function AddQuestion({ params }) {
                 <CardContent className='flex flex-col gap-4'>
                     <Input value={question} type="text" placeholder="Question" onChange={(e) => setQuestion(e.target.value)} />
                     <div className="grid grid-cols-2 gap-4" >
+                        
                         <Input value={optionA} type="text" placeholder="Option A" onChange={(e) => setOptionA(e.target.value)} />
                         <Input value={optionB} type="text" placeholder="Option B" onChange={(e) => setOptionB(e.target.value)} />
                         <Input value={optionC} type="text" placeholder="Option C" onChange={(e) => setOptionC(e.target.value)} />
                         <Input value={optionD} type="text" placeholder="Option D" onChange={(e) => setOptionD(e.target.value)} />
-                        <select name="Answer" onChange={(e) => setCorrectOption(e.target.value)} className="p-2 rounded-md bg-inherit outline outline-[0.5px] outline-primary-foreground text-white">
-                            <option value="A" className="text-primary-foreground">A</option>
-                            <option value="B" className="text-primary-foreground">B</option>
-                            <option value="C" className="text-primary-foreground">C</option>
-                            <option value="D" className="text-primary-foreground">D</option>
-                        </select>
+                        <Select onValueChange={(value) => setCorrectOption(value)} className="w-full">
+                            <SelectTrigger className="w-[180px]">
+                                <SelectValue placeholder="Select Answer" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="A" >A</SelectItem>
+                                <SelectItem value="B">B</SelectItem>
+                                <SelectItem value="C">C</SelectItem>
+                                <SelectItem value="D">D</SelectItem>
+                            </SelectContent>
+                        </Select>
+
                     </div>
                 </CardContent>
                 <CardFooter>

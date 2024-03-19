@@ -25,11 +25,11 @@ export default function CardWithForm() {
         <CardContent className='grid grid-cols-3'>
           <p className="col-span-2 flex justify-between"><span>Total Question</span><span>:</span> </p>
           <p className="flex justify-end">{totalQuestion}</p>
-          <p className="col-span-2 flex justify-between"><span>Correct Answer:</span><span>:</span></p>
+          <p className="col-span-2 flex justify-between"><span>Correct Answer</span><span>:</span></p>
           <p className="flex justify-end"> {correctAnswer} </p>
-          <p className="col-span-2 flex justify-between"><span>Wrong Answer:</span><span>:</span></p>
+          <p className="col-span-2 flex justify-between"><span>Wrong Answer</span><span>:</span></p>
           <p className="flex justify-end">{incorrectAnswer}</p>
-          <p className="col-span-2 flex justify-between"><span>Total Marks:</span><span>:</span></p>
+          <p className="col-span-2 flex justify-between"><span>Total Marks</span><span>:</span></p>
           <p className="flex justify-end">{marks}</p>
         </CardContent>
         <CardFooter className='flex justify-center'>

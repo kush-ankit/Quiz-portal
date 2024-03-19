@@ -79,11 +79,11 @@ export default function Dashboard() {
                 </div>
             </div> : <div className="flex flex-col gap-4">
                 <Skeleton className="h-[80px] w-[100%] rounded-xl" />
-                <div className="flex gap-4">
-                    <Skeleton className="h-[130px] w-[250px] rounded-xl" />
-                    <Skeleton className="h-[130px] w-[250px] rounded-xl" />
-                    <Skeleton className="h-[130px] w-[250px] rounded-xl" />
-                    <Skeleton className="h-[130px] w-[250px] rounded-xl" />
+                <div className="flex md:flex-row flex-col gap-4">
+                    <Skeleton className="h-[130px] md:w-[250px] w-full rounded-xl" />
+                    <Skeleton className="h-[130px] md:w-[250px] w-full rounded-xl" />
+                    <Skeleton className="h-[130px] md:w-[250px] w-full rounded-xl" />
+                    <Skeleton className="h-[130px] md:w-[250px] w-full rounded-xl" />
                 </div>
             </div>}
         </div>
