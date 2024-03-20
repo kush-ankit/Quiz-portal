@@ -9,11 +9,15 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { useAnswerStore, usePlayerStore } from "@/global/playerStore"
+import { useRouter } from "next/navigation"
 
 export default function CardWithForm() {
-
+  const router = useRouter();
   const [marks, correctAnswer, incorrectAnswer, totalQuestion] = useAnswerStore((state) => [state.marks, state.correctAnswer, state.incorrectAnswer, state.totalQuestion])
   const [player] = usePlayerStore((state) => [state.player]);
+  if (!player) {
+    router.push("/");
+  }
 
   return (
     <div className="w-full h-full grid place-items-center p-4">

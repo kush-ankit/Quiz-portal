@@ -37,7 +37,5 @@ export async function POST(req) {
     } catch (error) {
         console.log(error);
         return NextResponse.json({ error }, { status: 400 });
-    } finally {
-        await disconnectDB();
     }
 }

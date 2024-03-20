@@ -72,13 +72,12 @@ export default function AddQuestion({ params }) {
             <form onSubmit={handleSubmit}>
                 <CardContent className='flex flex-col gap-4'>
                     <Input value={question} type="text" placeholder="Question" onChange={(e) => setQuestion(e.target.value)} />
-                    <div className="grid grid-cols-2 gap-4" >
-                        
+                    <div className="grid md:grid-cols-2 gap-4" >
                         <Input value={optionA} type="text" placeholder="Option A" onChange={(e) => setOptionA(e.target.value)} />
                         <Input value={optionB} type="text" placeholder="Option B" onChange={(e) => setOptionB(e.target.value)} />
                         <Input value={optionC} type="text" placeholder="Option C" onChange={(e) => setOptionC(e.target.value)} />
                         <Input value={optionD} type="text" placeholder="Option D" onChange={(e) => setOptionD(e.target.value)} />
-                        <Select onValueChange={(value) => setCorrectOption(value)} className="w-full">
+                        <Select onValueChange={(value) => setCorrectOption(value)}>
                             <SelectTrigger className="w-[180px]">
                                 <SelectValue placeholder="Select Answer" />
                             </SelectTrigger>
@@ -89,17 +88,16 @@ export default function AddQuestion({ params }) {
                                 <SelectItem value="D">D</SelectItem>
                             </SelectContent>
                         </Select>
-
                     </div>
                 </CardContent>
-                <CardFooter>
-                    <span>{error}</span>
-                    {loading ? <Button disabled>
-                        <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                        Please wait
-                    </Button> : <Button type="submit" color="primary">Save Question</Button>
+                <CardFooter className='flex flex-col'>
+                    {error && <span className="text-red-500">*{error}</span>}
+                    {
+                        loading ? <Button disabled>
+                            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                            Please wait
+                        </Button> : <Button type="submit" color="primary">Save Question</Button>
                     }
-
                 </CardFooter>
             </form>
         </Card>

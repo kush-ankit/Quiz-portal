@@ -21,6 +21,9 @@ export default function Page() {
     const [num, setNum] = useState(0)
     const [ans, setAns] = useState(null)
 
+    if (!question) {
+        router.push("/");
+    }
 
     const handleRadioChange = (e) => {
         setAns(e.target.value)
@@ -28,7 +31,7 @@ export default function Page() {
 
     }
 
-    const handleSubmit = () => {
+    const handleNext = () => {
         if (question[num].Answer === ans) {
             setCorrectAnswer();
             setMarks();
@@ -36,9 +39,10 @@ export default function Page() {
             setIncorrectAnswer();
         }
         setNum(num + 1)
+        setAns(null)
     }
 
-    const handlelastSubmit = () => {
+    const handleSubmit = () => {
         if (question[num].Answer === ans) {
             setCorrectAnswer();
             setMarks();
@@ -53,34 +57,34 @@ export default function Page() {
             <div className="p-4">
                 <Card>
                     <CardHeader>
-                        <CardTitle>{question[num].question}</CardTitle>
+                        <CardTitle>{question[num]?.question}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <RadioGroup>
+                        <RadioGroup >
                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value={question[num].optionA} id="r1" onClick={handleRadioChange} />
-                                <Label htmlFor="r1">{question[num].optionA}</Label>
+                                <RadioGroupItem value="A" id="optionA" onClick={handleRadioChange} />
+                                <Label htmlFor="optionA">{question[num]?.optionA}</Label>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value={question[num].optionB} id="r2" onClick={handleRadioChange} />
-                                <Label htmlFor="r2">{question[num].optionB}</Label>
+                                <RadioGroupItem value="B" id="optionB" onClick={handleRadioChange} />
+                                <Label htmlFor="optionB">{question[num]?.optionB}</Label>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value={question[num].optionC} id="r3" onClick={handleRadioChange} />
-                                <Label htmlFor="r3">{question[num].optionC}</Label>
+                                <RadioGroupItem value="C" id="optionC" onClick={handleRadioChange} />
+                                <Label htmlFor="optionC">{question[num]?.optionC}</Label>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <RadioGroupItem value={question[num].optionD} id="r4" onClick={handleRadioChange} />
-                                <Label htmlFor="r4">{question[num].optionD}</Label>
+                                <RadioGroupItem value="D" id="optionD" onClick={handleRadioChange} />
+                                <Label htmlFor="optionD">{question[num]?.optionD}</Label>
                             </div>
                         </RadioGroup>
                     </CardContent>
                     <CardFooter className='flex justify-evenly'>
-                        <Button onClick={(e) => setNum(num - 1)} >Prev</Button>
+                        {num < 1 ? <Button disabled >Previous</Button> : <Button onClick={(e) => setNum(num - 1)} >Previous</Button>}
                         {
                             num < question.length - 1 ?
-                                <Button onClick={handleSubmit} >Next</Button> :
-                                <Button onClick={handlelastSubmit}>Submit</Button>
+                                <Button onClick={handleNext} >Next</Button> :
+                                <Button onClick={handleSubmit}>Submit</Button>
                         }
                     </CardFooter>
                 </Card>

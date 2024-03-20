@@ -21,7 +21,7 @@ import { HiOutlineMenuAlt1 } from "react-icons/hi";
 export default function Navbar() {
 
   const { data: session } = useSession();
-  const [player, roomName, roomEditor, roomCode] = usePlayerStore((state) => [state.player, state.roomName, state.roomEditor, state.roomCode]);
+  const [player] = usePlayerStore((state) => [state.player]);
 
 
   return (
@@ -48,6 +48,9 @@ export default function Navbar() {
                 <Link href={"/auth/register"}>Register</Link>
               </Button>
             </div>
+          }
+          {
+            player && player
           }
           <ModeToggle />
         </div>
