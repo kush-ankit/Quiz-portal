@@ -9,6 +9,7 @@ export default async function Home() {
 
   return (
     <main className="w-full h-full grid place-items-center">
+      <div>Example rooms are: 45570, 40554</div>
       <div className="w-full flex justify-around">
         <CodeComponent />
       </div>
