@@ -21,8 +21,8 @@ export default function CodeComponent() {
     const [code, setCode] = useState("");
     const [playerName, setPlayerName] = useState("");
     const [error, setError] = useState();
-    const [player, roomName, roomEditor, roomCode, setPlayer, setRoomName, setRoomEditor, setRoomCode] = usePlayerStore((state) => [state.player, state.roomName, state.roomEditor, state.roomCode, state.setPlayer, state.setRoomName, state.setRoomEditor, state.setRoomCode]);
-    const [question, getStoreQuestion] = useQuestionStore((state) => [state.question, state.getStoreQuestion])
+    const [setPlayer, setRoomName, setRoomEditor, setRoomCode] = usePlayerStore((state) => [state.setPlayer, state.setRoomName, state.setRoomEditor, state.setRoomCode]);
+    const [getStoreQuestion] = useQuestionStore((state) => [state.getStoreQuestion])
 
     // const handleSubmit = async (e) => {
     //     e.preventDefault();

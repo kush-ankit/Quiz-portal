@@ -58,9 +58,9 @@ export default function Navbar() {
           <SheetTrigger className='md:hidden'><HiOutlineMenuAlt1 size={40} /></SheetTrigger>
           <SheetContent>
             <SheetHeader>
-              <SheetTitle className='flex justify-between items-center py-4'><div>{player ? player : session?.user?.name}</div> <ModeToggle /></SheetTitle>
+              <SheetTitle className='flex justify-between items-center py-4'>{player ? player : session?.user?.name} <ModeToggle /></SheetTitle>
               <SheetDescription>
-                {session && <div className="flex gap-2 items-baseline">
+                {session && <span className="flex gap-2 items-baseline">
                   <Button
                     onClick={() => signOut()}
                     variant="destructive"
@@ -68,16 +68,16 @@ export default function Navbar() {
                   >
                     Log Out
                   </Button>
-                </div>}
+                </span>}
                 {!session && !player &&
-                  <div className="flex flex-col gap-2">
+                  <span className="flex flex-col gap-2">
                     <Button asChild variant='outline' size='sm'>
                       <Link href={"/auth/login"}>Login</Link>
                     </Button>
                     <Button asChild size='sm'>
                       <Link href={"/auth/register"}>Register</Link>
                     </Button>
-                  </div>
+                  </span>
                 }
               </SheetDescription>
             </SheetHeader>
