@@ -1,3 +1,4 @@
+"use client"
 import CodeComponent from '@/components/play/codeComponent'
 
 export default function Page() {

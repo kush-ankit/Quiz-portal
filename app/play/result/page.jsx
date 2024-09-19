@@ -11,7 +11,7 @@ import {
 import { useAnswerStore, usePlayerStore } from "@/global/playerStore"
 import { useRouter } from "next/navigation"
 
-export default function CardWithForm() {
+export default function Page() {
   const router = useRouter();
   const [marks, correctAnswer, incorrectAnswer, totalQuestion] = useAnswerStore((state) => [state.marks, state.correctAnswer, state.incorrectAnswer, state.totalQuestion])
   const [player] = usePlayerStore((state) => [state.player]);
